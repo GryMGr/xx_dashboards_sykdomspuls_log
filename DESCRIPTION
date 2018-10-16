@@ -8,3 +8,4 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Additional_repositories: https://folkehelseinstituttet.github.io/drat/, https://raubreywhite.github.io/drat/
+RoxygenNote: 6.0.1
