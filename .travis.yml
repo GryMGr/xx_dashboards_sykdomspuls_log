@@ -4,22 +4,25 @@ r_packages:
 - covr
 - drat
 - pkgdown
+- lintr
+- styler
 before_install:
-- bash make.sh
+- bash travis/make.sh
 after_success:
+- Rscript -e 'lintr::lint_package(lint=lintr::with_defaults(camel_case_linter = NULL,
+  snake_case_linter=NULL, line_length_linter = lintr::line_length_linter(120), object_usage_linter=NULL))'
 - Rscript -e 'library(covr); codecov()'
 - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash
-  deploy.sh
+  travis/drat.sh
+- test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && bash
+  travis/styler.sh
 - test $TRAVIS_PULL_REQUEST == "false" && test $TRAVIS_BRANCH == "master" && Rscript
   -e 'Sys.sleep(10);install.packages("sykdomspulslog",repos="https://folkehelseinstituttet.github.io/drat/");pkgdown::build_site()'
 deploy:
   provider: pages
   skip-cleanup: true
-  github-token: "$GH_TOKEN"
+  github-token: "$GITHUB_PAT"
   keep-history: true
   local-dir: docs
   on:
     branch: master
-env:
-  global:
-    secure: KuMfJMF3/ZHAUJNHNVys4nsykEo/YymXNjyuCwErblCIYUYdnJBc35KkweiAc4NKQ9EFdZ/u8nxNeiD9e4eFpxn7r36YxSd5p8RKG+wrznw411L7wzzUZltc9A6dgvizxiednL/YYptXLZlCL63a/qiN8jDlNDk/fjWbUuQ0YwKLyiAJzMM5GkU10RslIP7hTPDXolN0oe3svCp7q7vtZD1HjJgwlL9UgnP92BjgAqj5ndgfgCdaWQV6KAse4t8sFfcHaq84SWOBFu1PRj9xzwMoLg3XxIFMUK+peukMY0aT+hdfT4k3nkNMrY6GkIlzIgI66jrz4JtlMBa4VuPLykR5AtQUkG6BMgXXLuCQQ5WVIwxE4vS06IoJMs894R86TlBPdSAAKjEvyL0VXiNtFS1qw/6+AwAh5fkBAdVzgbuPy7QdXmYPoimv9VZJK3tvsPIIYf/bdEN7U4pntaY5Q1on6S0k1ThBVJjeeKaGQJr6asbqjk1sXsqX7DcK+x8PdArlt2SwFPnFpDxw7rpNdBnXMm8FPMoa2rSCPXHljGFv1ygGrZWDZfcQOMfvKMlykIvHAXHz9PW4poy6Wl2NSL49/HhGV70jDLZYg0VhtbdSSYIYDNTuX4Aku8wxwc4WpweTgdIdPPhbxDRmugEEEp8ROnw6xGYhxvPihbWd510=
