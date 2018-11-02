@@ -1,5 +1,5 @@
 #' Blah
 #' @export XXXX
-XXXX <- function() {
+XXXX <- function(){
 
 }
