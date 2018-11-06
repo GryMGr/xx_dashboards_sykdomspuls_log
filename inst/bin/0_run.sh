@@ -18,7 +18,7 @@ COMPUTER=$(cat /tmp/computer)
     ncftpget -R -v -u "sykdomspulsen.fhi.no|data" -p $SYKDOMSPULS_PROD sykdomspulsen.fhi.no /data_raw/sykdomspuls_log/ /data/log/*
   fi
 
-  /usr/local/bin/Rscript /r/sykdomspuls_log/src/RunProcess.R
+  /usr/local/bin/Rscript /r/sykdomspulslog/src/RunProcess.R
 
   echo "****END****sykdomspuls_log****"
   

@@ -18,7 +18,7 @@ a$start_reporter()
 a$out <- file(file.path("/junit","sykdomspuls_log.xml"), "w+")
 a$start_context("sykdomspuls_log")
 
-output <- processx::run("Rscript","/r/sykdomspuls_log/src/RunProcess.R", error_on_status=F, echo=T)
+output <- processx::run("Rscript","/r/sykdomspulslog/src/RunProcess.R", error_on_status=F, echo=T)
 cat("\n\nstdout\n\n")
 cat(output$stdout)
 cat("\n\nstderr\n\n")
