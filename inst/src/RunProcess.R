@@ -1,6 +1,6 @@
 fhi::DashboardInitialiseOpinionated(
   NAME="sykdomspuls_log",
-  PKG="sykdomspulslog,
+  PKG="sykdomspulslog",
   PACKAGE_DIR=".")
 
 suppressMessages(library(data.table))
